@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ssds", $employee_name, $position, $salary, $hire_date);
 
     if ($stmt->execute()) {
-        header("Location: index.php");  // Redirect to the main page after insert
+        header("Location: index.php"); 
     } else {
         echo "Error: " . $stmt->error;
     }

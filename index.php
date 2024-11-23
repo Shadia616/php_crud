@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-// Fetch all employees from the database
+
 $sql = "SELECT * FROM employees";
 $result = $conn->query($sql);
 ?>

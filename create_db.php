@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-// Create database if it doesn't exist
+
 $sql = "CREATE DATABASE IF NOT EXISTS company_management";
 if ($conn->query($sql) === TRUE) {
     echo "Database created successfully.<br>";
@@ -9,10 +9,9 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating database: " . $conn->error . "<br>";
 }
 
-// Use the created database
+
 $conn->select_db($database);
 
-// Create employees table if it doesn't exist
 $sql = "CREATE TABLE IF NOT EXISTS employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     employee_name VARCHAR(50) NOT NULL,

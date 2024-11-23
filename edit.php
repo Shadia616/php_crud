@@ -1,10 +1,10 @@
 <?php
 include 'config.php';
 
-// Get the employee ID from the URL parameter
+
 $id = $_GET['id'];
 
-// Fetch the current data for the employee from the database
+
 $sql = "SELECT * FROM employees WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
@@ -12,30 +12,29 @@ $stmt->execute();
 $result = $stmt->get_result();
 $employee = $result->fetch_assoc();
 
-// Check if the employee exists
 if (!$employee) {
     echo "Employee not found!";
     exit();
 }
 
-// Handle form submission (Update)
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the updated data from the form
+    
     $employee_name = $_POST['employee_name'];
     $position = $_POST['position'];
     $salary = $_POST['salary'];
     $hire_date = $_POST['hire_date'];
 
-    // Prepare the SQL update query
+    
     $update_sql = "UPDATE employees SET employee_name = ?, position = ?, salary = ?, hire_date = ? WHERE id = ?";
     $update_stmt = $conn->prepare($update_sql);
     $update_stmt->bind_param("ssdsi", $employee_name, $position, $salary, $hire_date, $id);
 
-    // Execute the query
+    
     if ($update_stmt->execute()) {
-        // Redirect to the same page to show updated details
+        
         echo "<p style='color: green;'>Employee details updated successfully!</p>";
-        // Reload the data after update
+        
         $stmt->execute();
         $result = $stmt->get_result();
         $employee = $result->fetch_assoc();
@@ -43,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p style='color: red;'>Error updating record: " . $conn->error . "</p>";
     }
 
-    // Close the prepared statement
+    
     $update_stmt->close();
 }
 
